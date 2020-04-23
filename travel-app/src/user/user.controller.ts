@@ -1,8 +1,8 @@
-import { Controller, Body, Post, Get, HttpException, HttpStatus} from "@nestjs/common";
+import { Controller, Body, Post, Get, HttpException, HttpStatus, Param} from "@nestjs/common";
 import { UserDto } from "./dto/user.dto";
 import { UserService } from "./user.service";
 import { UserError } from "./exceptions/user.error";
-import { BadRequestError } from "src/error/badRequestError";
+//import { BadRequestError } from "src/error/badRequestError";
 
 
 @Controller('users')
@@ -22,8 +22,8 @@ export class UserController {
         
     }
     
-    @Get()
-    async getUser(@Body('uid') uid: string) {
+    @Get(':uid')
+    async getUser(@Param('uid') uid: string) {
         try {
             const userResponse = await this.userService.getUser(uid);
             if(userResponse != null) {
